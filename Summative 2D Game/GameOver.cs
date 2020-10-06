@@ -16,6 +16,10 @@ namespace Summative_2D_Game
         {
             InitializeComponent();
         }
+        private void GameOver_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(Properties.Resources.heroWalkF1, this.Width - 64, this.Height + 32);
+        }
 
         private void againButton_Click(object sender, EventArgs e)
         {
@@ -30,5 +34,7 @@ namespace Summative_2D_Game
         {
             Environment.Exit(0);
         }
+
+        
     }
 }

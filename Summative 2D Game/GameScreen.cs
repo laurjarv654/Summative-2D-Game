@@ -13,7 +13,7 @@ namespace Summative_2D_Game
 {
     public partial class GameScreen : UserControl
     {
-        Boolean leftArrowDown, rightArrowDown, upArrowDown, downArrowDown, spaceDown;
+        Boolean aDown, dDown, wDown, sDown, spaceDown;
 
         SolidBrush heroBrush = new SolidBrush(Color.Black);
         SolidBrush livesBrush = new SolidBrush(Color.Red);
@@ -124,17 +124,17 @@ namespace Summative_2D_Game
         {
             switch (e.KeyCode)
             {
-                case Keys.Left:
-                    leftArrowDown = true;
+                case Keys.A:
+                    aDown = true;
                     break;
-                case Keys.Right:
-                    rightArrowDown = true;
+                case Keys.D:
+                    dDown = true;
                     break;
-                case Keys.Up:
-                    upArrowDown = true;
+                case Keys.W:
+                    wDown = true;
                     break;
-                case Keys.Down:
-                    downArrowDown = true;
+                case Keys.S:
+                    sDown = true;
                     break;
                 case Keys.Space:
                     spaceDown = true;
@@ -146,17 +146,17 @@ namespace Summative_2D_Game
         {
             switch (e.KeyCode)
             {
-                case Keys.Left:
-                    leftArrowDown = false;
+                case Keys.A:
+                    aDown = false;
                     break;
-                case Keys.Right:
-                    rightArrowDown = false;
+                case Keys.D:
+                    dDown = false;
                     break;
-                case Keys.Up:
-                    upArrowDown = false;
+                case Keys.W:
+                    wDown = false;
                     break;
-                case Keys.Down:
-                    downArrowDown = false;
+                case Keys.S:
+                    sDown = false;
                     break;
                 case Keys.Space:
                     spaceDown = false;
@@ -169,7 +169,7 @@ namespace Summative_2D_Game
             #region update hero movement
             
 
-            if (downArrowDown == true)
+            if (sDown == true)
             {
                 hero.MoveUpDown(HEROSPEED);
                 direction = "down";
@@ -193,7 +193,7 @@ namespace Summative_2D_Game
 
 
             }
-            if (upArrowDown == true)
+            if (wDown == true)
             {
                 hero.MoveUpDown(-HEROSPEED);
                 direction = "up";
@@ -217,7 +217,7 @@ namespace Summative_2D_Game
 
 
             }
-            if (leftArrowDown == true)
+            if (aDown == true)
             {
                 hero.MoveRightLeft(-HEROSPEED);
                 direction = "left";
@@ -241,7 +241,7 @@ namespace Summative_2D_Game
 
 
             }
-            if (rightArrowDown)
+            if (dDown)
             {
                 hero.MoveRightLeft(HEROSPEED);
                 direction = "right";
@@ -375,21 +375,21 @@ namespace Summative_2D_Game
             int lifeCount = lives.Count;
             if (heroRec.IntersectsWith(enemyRec1) && lifeCount > 0 || heroRec.IntersectsWith(enemyRec2) && lifeCount > 0)
             {
-                if (leftArrowDown)
+                if (aDown)
                 {
                     hero.Stop("left", 15);
                 }
-                if (rightArrowDown)
+                if (dDown)
                 {
                     hero.Stop("right", 15);
 
                 }
-                if (upArrowDown)
+                if (wDown)
                 {
                     hero.Stop("up", 15);
 
                 }
-                if (downArrowDown)
+                if (sDown)
                 {
                     hero.Stop("down", 15);
                 }
@@ -424,21 +424,21 @@ namespace Summative_2D_Game
             {
                 if (heroRec.IntersectsWith(i))
                 {
-                    if (leftArrowDown)
+                    if (aDown)
                     {
                         hero.Stop("left", HEROSPEED);
                     }
-                    if (rightArrowDown)
+                    if (dDown)
                     {
                         hero.Stop("right", HEROSPEED);
 
                     }
-                    if (upArrowDown)
+                    if (wDown)
                     {
                         hero.Stop("up", HEROSPEED);
 
                     }
-                    if (downArrowDown)
+                    if (sDown)
                     {
                         hero.Stop("down", HEROSPEED);
                     }
@@ -494,7 +494,7 @@ namespace Summative_2D_Game
             Refresh();
             
         }
-            private void GameScreen_Paint(object sender, PaintEventArgs e)
+        private void GameScreen_Paint(object sender, PaintEventArgs e)
             {
 
                 //redrawing hero

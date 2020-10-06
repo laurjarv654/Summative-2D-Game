@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.returnButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -67,11 +69,35 @@
             this.returnButton.UseVisualStyleBackColor = false;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Firebrick;
+            this.label4.Location = new System.Drawing.Point(34, 125);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(687, 145);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "-Use *WASD* to move.\r\n- Press *Space* to shoot attacks\r\n- Try and get to the othe" +
+    "r side of the room without running \r\ninto enemies\r\n- Good luck!\r\n";
+
+            // 
             // Instructions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -87,5 +113,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button returnButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
