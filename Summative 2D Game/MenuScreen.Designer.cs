@@ -78,6 +78,7 @@
             this.instructionButton.TabIndex = 4;
             this.instructionButton.Text = "Instruction";
             this.instructionButton.UseVisualStyleBackColor = false;
+            this.instructionButton.Click += new System.EventHandler(this.instructionButton_Click);
             // 
             // MenuScreen
             // 

@@ -13,7 +13,7 @@ namespace Summative_2D_Game
 {
     public partial class GameScreen : UserControl
     {
-        Boolean leftArrowDown, rightArrowDown, upArrowDown, downArrowDown, shiftDown;
+        Boolean leftArrowDown, rightArrowDown, upArrowDown, downArrowDown, spaceDown;
 
         SolidBrush heroBrush = new SolidBrush(Color.Black);
         SolidBrush livesBrush = new SolidBrush(Color.Red);
@@ -48,16 +48,25 @@ namespace Summative_2D_Game
 
             #region initialize border rectangles
             //sides
+            //top
             borders.Add(new Rectangle(0, 0, this.Width, 20));
+            //bottom
             borders.Add(new Rectangle(0, this.Height - 20, this.Width, 20));
+            //left
             borders.Add(new Rectangle(0, 0, 20, this.Height / 2 - 50));
             borders.Add(new Rectangle(0, this.Height / 2 + 50, 20, this.Height / 2 - 50));
+            //right
             borders.Add(new Rectangle(this.Width - 20, 0, 20, this.Height / 2 - 50));
             borders.Add(new Rectangle(this.Width - 20, this.Height / 2 + 50, 20, this.Height / 2 - 50));
 
             //middle sections
             borders.Add(new Rectangle(130, 90, 70, 200));
             borders.Add(new Rectangle(420, 90, 70, 200));
+
+            //rectangle to intersect with while leaving/entering
+            borders.Add(new Rectangle(this.Width - 1, 0, 1, this.Height));
+            borders.Add(new Rectangle(0, 0, 1, this.Height));
+
 
             #endregion
 
@@ -107,9 +116,8 @@ namespace Summative_2D_Game
             enemy1 = new Enemy(100, 40, 40);
             enemy2 = new Enemy(this.Width - 100, this.Height - 60, 40);
 
-            attackBall = new Attacks(hero.x, hero.y, 20);
-            attackRec = new Rectangle(attackBall.x, attackBall.y, attackBall.size, attackBall.size);
-            direction = "left";
+            
+            direction = "right";
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -128,8 +136,8 @@ namespace Summative_2D_Game
                 case Keys.Down:
                     downArrowDown = true;
                     break;
-                case Keys.Shift:
-                    shiftDown = true;
+                case Keys.Space:
+                    spaceDown = true;
                     break;
             }
         }
@@ -150,8 +158,8 @@ namespace Summative_2D_Game
                 case Keys.Down:
                     downArrowDown = false;
                     break;
-                case Keys.Shift:
-                    shiftDown = false;
+                case Keys.Space:
+                    spaceDown = false;
                     break;
             }
         }
@@ -391,6 +399,26 @@ namespace Summative_2D_Game
                 Thread.Sleep(1000);
             }
 
+            if (lifeCount ==0)
+            {
+                gameTimer.Enabled = false;
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+                GameOver gs = new GameOver();
+                f.Controls.Add(gs);
+                gs.Focus();
+            }
+
+            if (heroRec.IntersectsWith(borders[8]))
+            {
+                gameTimer.Enabled = false;
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+                Win w = new Win();
+                f.Controls.Add(w);
+                w.Focus();
+            }
+
 
             foreach (Rectangle i in borders)
             {
@@ -419,12 +447,49 @@ namespace Summative_2D_Game
 
             #endregion
 
-            if (shiftDown == true)
+            #region shooting
+            if (spaceDown == true)
             {
-                attackBall.Shoot(10, direction);
+                attackBall = new Attacks(hero.x, hero.y, 30);
+                
+
+                
                 shoot = true;
 
             }
+
+            if (shoot == true)
+            {
+                //setting rectangle to match attackBall
+                attackRec = new Rectangle(attackBall.x, attackBall.y, attackBall.size, attackBall.size);
+
+                attackBall.Shoot(10, direction);
+
+                //if ball hits enemy, make ball + enemy disappear
+                if(attackRec.IntersectsWith(enemyRec1))
+                {
+                    attackBall = new Attacks(0, 0, 0);
+                    enemy1 = new Enemy(0, 0, 0);
+                    shoot = false;
+                }
+                if (attackRec.IntersectsWith(enemyRec2))
+                {
+                    attackBall = new Attacks(0, 0, 0);
+                    enemy2 = new Enemy(0, 0, 0);
+                    shoot = false;
+                }
+
+                //if ball hits wall, make it disappear
+                foreach(Rectangle r in borders)
+                {
+                    if (attackRec.IntersectsWith(r))
+                    {
+                        attackBall = new Attacks(0, 0, 0);
+                        shoot = false;
+                    }
+                }
+            }
+            #endregion
 
             Refresh();
             
@@ -448,12 +513,13 @@ namespace Summative_2D_Game
                 //drawing lives
                 foreach (Rectangle r in lives)
                 {
-                    e.Graphics.FillRectangle(livesBrush, r);
+                    e.Graphics.DrawImage(Properties.Resources.lifeHeart, r);
                 }
 
                 if (shoot == true)
                 {
                 e.Graphics.DrawImage(Properties.Resources.orb1, attackBall.x, attackBall.y, attackBall.size, attackBall.size);
+                //shoot = false;
                 }
 
 

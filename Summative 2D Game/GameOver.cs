@@ -19,7 +19,11 @@ namespace Summative_2D_Game
 
         private void againButton_Click(object sender, EventArgs e)
         {
-
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+            GameScreen gs = new GameScreen();
+            f.Controls.Add(gs);
+            gs.Focus();
         }
 
         private void exitButton_Click(object sender, EventArgs e)

@@ -25,5 +25,14 @@ namespace Summative_2D_Game
             f.Controls.Add(gs);
             gs.Focus();
         }
+
+        private void instructionButton_Click(object sender, EventArgs e)
+        {
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+            Instructions i = new Instructions();
+            f.Controls.Add(i);
+            i.Focus();
+        }
     }
 }
