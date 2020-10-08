@@ -61,6 +61,15 @@ namespace Summative_2D_Game.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream deathSound {
+            get {
+                return ResourceManager.GetStream("deathSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap heroWalkB1 {
@@ -167,6 +176,15 @@ namespace Summative_2D_Game.Properties {
             get {
                 object obj = ResourceManager.GetObject("orb2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream pewSound {
+            get {
+                return ResourceManager.GetStream("pewSound", resourceCulture);
             }
         }
         

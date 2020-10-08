@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
 namespace Summative_2D_Game
 {
@@ -39,6 +40,10 @@ namespace Summative_2D_Game
         //attack variables
         string direction;
         Boolean shoot = false;
+
+        SoundPlayer oofSound = new SoundPlayer(Properties.Resources.deathSound);
+
+        SoundPlayer pewSound = new SoundPlayer(Properties.Resources.pewSound);
 
 
         public GameScreen()
@@ -375,6 +380,7 @@ namespace Summative_2D_Game
             int lifeCount = lives.Count;
             if (heroRec.IntersectsWith(enemyRec1) && lifeCount > 0 || heroRec.IntersectsWith(enemyRec2) && lifeCount > 0)
             {
+                oofSound.Play();
                 if (aDown)
                 {
                     hero.Stop("left", 15);
@@ -451,9 +457,7 @@ namespace Summative_2D_Game
             if (spaceDown == true)
             {
                 attackBall = new Attacks(hero.x, hero.y, 30);
-                
-
-                
+               
                 shoot = true;
 
             }
@@ -464,6 +468,7 @@ namespace Summative_2D_Game
                 attackRec = new Rectangle(attackBall.x, attackBall.y, attackBall.size, attackBall.size);
 
                 attackBall.Shoot(10, direction);
+                
 
                 //if ball hits enemy, make ball + enemy disappear
                 if(attackRec.IntersectsWith(enemyRec1))
@@ -471,12 +476,14 @@ namespace Summative_2D_Game
                     attackBall = new Attacks(0, 0, 0);
                     enemy1 = new Enemy(0, 0, 0);
                     shoot = false;
+                    oofSound.Play();
                 }
                 if (attackRec.IntersectsWith(enemyRec2))
                 {
                     attackBall = new Attacks(0, 0, 0);
                     enemy2 = new Enemy(0, 0, 0);
                     shoot = false;
+                    oofSound.Play();
                 }
 
                 //if ball hits wall, make it disappear
@@ -486,6 +493,7 @@ namespace Summative_2D_Game
                     {
                         attackBall = new Attacks(0, 0, 0);
                         shoot = false;
+                        oofSound.Play();
                     }
                 }
             }

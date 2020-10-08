@@ -197,5 +197,11 @@
   <ItemGroup>
     <None Include="Resources\lifeHeart.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pewSound.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deathSound.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
